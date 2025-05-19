@@ -1,3 +1,4 @@
+import json
 from playwright.sync_api import sync_playwright
 
 
@@ -21,6 +22,10 @@ def scrape():
         print('Quotes:')
         for quote in quotes:
             print(f"{quote['text']} — {quote['author']}")
+
+        # Save to JSON file
+        with open('quotes.json', 'w') as f:
+            json.dump(quotes, f, indent=4)
 
         browser.close()
 

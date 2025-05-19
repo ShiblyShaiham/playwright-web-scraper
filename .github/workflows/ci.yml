@@ -1,4 +1,4 @@
-name: Playwright Scraping CI
+name: Playwright Scraper CI/CD
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Setup Python
@@ -27,6 +27,12 @@ jobs:
           pip install playwright
           python -m playwright install
 
-      - name: Run scraping script
+      - name: Run scraper
         run: |
           python scrape.py
+
+      - name: Upload scraped data artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: scraped-quotes
+          path: quotes.json
