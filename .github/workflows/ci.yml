@@ -1,4 +1,4 @@
-name: Playwright Web Scraping CI
+name: Playwright Scraping CI
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup Python
@@ -27,6 +27,6 @@ jobs:
           pip install playwright
           python -m playwright install
 
-      - name: Run scraper script
+      - name: Run scraping script
         run: |
           python scrape.py
