@@ -9,7 +9,7 @@ def save_to_file(data):
 def scrape():
     with sync_playwright() as p:
         # Launch the browser in non-headless mode for debugging
-        browser = p.chromium.launch(headless=False)  # headless=False means we can see the browser
+        browser = p.chromium.launch(headless=True)  # headless=False means we can see the browser
         page = browser.new_page()
 
         # Go to the BBC News page
