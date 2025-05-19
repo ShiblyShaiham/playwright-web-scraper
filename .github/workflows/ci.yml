@@ -32,7 +32,7 @@ jobs:
           python scrape.py
 
       - name: Upload scraped data artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: scraped-quotes
           path: quotes.json
