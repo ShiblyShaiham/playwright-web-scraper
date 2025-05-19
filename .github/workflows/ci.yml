@@ -1,4 +1,4 @@
-name: Playwright Scraper CI/CD
+name: Playwright Scraper CI
 
 on:
   push:
@@ -30,9 +30,3 @@ jobs:
       - name: Run scraper
         run: |
           python scrape.py
-
-      - name: Upload scraped data artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: scraped-quotes
-          path: quotes.json
