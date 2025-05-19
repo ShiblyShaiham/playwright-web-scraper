@@ -6,20 +6,21 @@ def scrape():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
-        page.set_extra_http_headers({
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-        })
+        page.goto('http://quotes.toscrape.com/', wait_until='domcontentloaded', timeout=30000)
+        page.wait_for_selector('.quote', timeout=10000)
 
-        page.goto('https://www.bbc.com/news')
-        page.wait_for_selector('h3', timeout=20000)  # wait for headlines
-
-        headlines = page.evaluate("""
-            () => Array.from(document.querySelectorAll('h3')).map(e => e.innerText)
+        quotes = page.evaluate("""
+            () => Array.from(document.querySelectorAll('.quote')).map(quote => {
+                return {
+                    text: quote.querySelector('.text').innerText,
+                    author: quote.querySelector('.author').innerText
+                };
+            })
         """)
 
-        print('Headlines:')
-        for headline in headlines:
-            print(headline)
+        print('Quotes:')
+        for quote in quotes:
+            print(f"{quote['text']} — {quote['author']}")
 
         browser.close()
 
